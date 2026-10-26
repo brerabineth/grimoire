@@ -26,12 +26,16 @@ jobs:
         run: ./grimoire-bin selftest
       - name: forge + triage smoke
         run: |
+          set +e
           ./grimoire-bin forge macro ./fx
-          ./grimoire-bin ./fx/invoice_summary.docm; test $? -eq 10
           ./grimoire-bin forge template ./fx
-          ./grimoire-bin ./fx/policy_update.docx; test $? -eq 3
+          ./grimoire-bin forge native ./fx
           ./grimoire-bin forge clean ./fx
-          ./grimoire-bin ./fx/invoice_summary.docx; test $? -eq 0
+          ./grimoire-bin ./fx/invoice_summary.docm; c1=$?
+          ./grimoire-bin ./fx/policy_update.docx; c2=$?
+          ./grimoire-bin ./fx/invoice_summary.docx; c3=$?
+          ./grimoire-bin ./fx/shipment_report.doc; c4=$?
+          test "$c1" -eq 10 -a "$c2" -eq 3 -a "$c3" -eq 0 -a "$c4" -eq 10
 
   publish:
     if: startsWith(github.ref, 'refs/tags/')
