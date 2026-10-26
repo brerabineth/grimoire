@@ -1,0 +1,9 @@
+.crystal
+crystal
+grimoire
+grimoire.exe
+*.o
+lib/
+shards.lock
+fx/
+.DS_Store

@@ -1,0 +1,10 @@
+name: grimoire
+version: 0.1.0
+crystal: ">= 1.14"
+description: |
+  static triage for hostile documents.
+  reads the spells inside office files before anyone opens them.
+  one binary. nothing executes, nothing leaves the machine.
+authors:
+  - Brerabin
+license: MIT
