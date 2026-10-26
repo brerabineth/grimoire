@@ -27,11 +27,11 @@ jobs:
       - name: forge + triage smoke
         run: |
           ./grimoire-bin forge macro ./fx
-          ./grimoire-bin ./fx/invoice_summary.docm
+          ./grimoire-bin ./fx/invoice_summary.docm; test $? -eq 10
           ./grimoire-bin forge template ./fx
-          ./grimoire-bin ./fx/policy_update.docx || test $? -eq 3
+          ./grimoire-bin ./fx/policy_update.docx; test $? -eq 3
           ./grimoire-bin forge clean ./fx
-          ./grimoire-bin ./fx/invoice_summary.docx
+          ./grimoire-bin ./fx/invoice_summary.docx; test $? -eq 0
 
   publish:
     if: startsWith(github.ref, 'refs/tags/')
